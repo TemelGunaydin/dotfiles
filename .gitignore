@@ -1,0 +1,37 @@
+# macOS, shell caches and Nix build output
+.DS_Store
+.zcompdump*
+*.zwc
+/result
+/result-*
+
+# Home Manager adoption backups
+*.before-home-manager
+*.backup
+
+# Editor downloads and runtime state
+/home/.config/nvim/pack/
+/home/.config/nvim/.nvim/
+/home/.config/nvim/nvim.log
+
+# Herdr runtime files
+/home/.config/herdr/*.log
+/home/.config/herdr/session.json
+/home/.config/herdr/*.sock
+/home/.config/herdr/.plugins.lock
+/home/.config/herdr/release-notes.json
+
+# Pi credentials and session/runtime state
+/home/.pi/agent/auth.json
+/home/.pi/agent/mcp.json
+/home/.pi/agent/trust.json
+/home/.pi/agent/sessions/
+/home/.pi/agent/npm/
+/home/.pi/agent/git/
+/home/.pi/agent/install/
+/home/.pi/agent/calm
+
+# AI credentials remain outside this repository
+/home/.codex/auth.json
+/home/.claude/.credentials.json
+node_modules/

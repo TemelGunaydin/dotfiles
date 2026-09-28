@@ -1,0 +1,38 @@
+{
+  "providers": {
+    "openai-codex": {
+      "modelOverrides": {
+        "gpt-5.6-luna": {
+          "contextWindow": 272000
+        },
+        "gpt-5.6-sol": {
+          "contextWindow": 272000
+        },
+        "gpt-5.6-terra": {
+          "contextWindow": 272000
+        }
+      }
+    },
+    "qwen-windows": {
+      "api": "openai-completions",
+      "apiKey": "lm-studio",
+      "baseUrl": "http://192.168.1.18:1234/v1",
+      "models": [
+        {
+          "id": "mistralai/devstral-small-2-2512",
+          "input": [
+            "text"
+          ],
+          "reasoning": true
+        },
+        {
+          "id": "qwen/qwen3-coder-next",
+          "input": [
+            "text"
+          ],
+          "reasoning": true
+        }
+      ]
+    }
+  }
+}

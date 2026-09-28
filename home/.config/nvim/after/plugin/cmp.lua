@@ -1,0 +1,52 @@
+-- code completion icindir.
+-- dosya icinde var olanlar icin oneri gosterir
+-- İçeriğini (fonksiyon, method, değişken listesi) kendisi üretmez.
+-- LSP’den veri çekmez.
+-- -- “Bu dil hakkında ne biliyorsun?” diye sormaz.
+--
+-- -- INFO ama cmp_nvim_lsp ise LSP sunucusuna “bana tamamlanabilir şeyler gönder, ben cmp’de göstereceğim” diye capability bildirir. Ama biz bunu kullanmiyoruz yerine blink.cmp kullaniliyor.
+-- local cmp = require("cmp")
+-- -- Safely require cmp-nvim-lsp (should be available since it's a dependency)
+-- -- local capabilities
+-- -- local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp-nvim-lsp")
+-- -- if cmp_nvim_lsp_ok then
+-- -- 	capabilities = cmp_nvim_lsp.default_capabilities()
+-- -- else
+-- -- 	-- Fallback to default capabilities if not available
+-- -- 	capabilities = vim.lsp.protocol.make_client_capabilities()
+-- -- end
+-- local lspkind = require("lspkind")
+-- cmp.setup({
+-- 	-- Where to get completion results from
+-- 	sources = cmp.config.sources({
+-- 		{ name = "nvim_lsp" },
+-- 		{ name = "buffer" },
+-- 		{ name = "path" },
+-- 	}),
+-- 	formatting = {
+-- 		format = lspkind.cmp_format({ with_text = false, maxwidth = 50 }),
+-- 	},
+-- 	-- Make 'enter' key select the completion
+-- 	mapping = cmp.mapping.preset.insert({
+-- 		["<CR>"] = cmp.mapping.confirm({ select = true }),
+-- 		["<tab>"] = cmp.mapping(function(original)
+-- 			if cmp.visible() then
+-- 				cmp.select_next_item() -- run completion selection if completing
+-- 			else
+-- 				original() -- run the original behavior if not completing
+-- 			end
+-- 		end, { "i", "s" }),
+-- 		["<S-tab>"] = cmp.mapping(function(original)
+-- 			if cmp.visible() then
+-- 				cmp.select_prev_item()
+-- 			else
+-- 				original()
+-- 			end
+-- 		end, { "i", "s" }),
+-- 	}),
+-- })
+--
+-- vim.cmd([[
+--   set completeopt=menuone,noinsert,noselect
+--   highlight! default link CmpItemKind CmpItemMenuDefault
+-- ]])

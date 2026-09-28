@@ -1,0 +1,27 @@
+{
+  "images": {
+    "blockImages": false
+  },
+  "terminal": {
+    "showImages": false
+  },
+  "hideThinkingBlock": true,
+  "quietStartup": true,
+  "theme": "dark",
+  "steeringMode": "all",
+  "followUpMode": "all",
+  "collapseChangelog": true,
+  "packages": [
+    "npm:pi-open-agents",
+    "npm:pi-session-import",
+    "npm:pi-mcp-extension",
+    "npm:pi-session-kit",
+    "npm:pi-web-search",
+    "npm:pi-web-access@0.14.0",
+    "npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6"
+  ],
+  "defaultModel": "gpt-6-sol",
+  "defaultProvider": "openai-codex",
+  "lastChangelogVersion": "0.87.1",
+  "defaultThinkingLevel": "xhigh"
+}
