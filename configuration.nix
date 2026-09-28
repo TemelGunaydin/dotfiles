@@ -57,7 +57,8 @@
 
     casks = [
       "wezterm"
-      "font-jetbrains-mono" # requested by home/.config/wezterm/wezterm.lua
+      "font-hack-nerd-font" # requested by home/.config/wezterm/wezterm.lua
+      "font-jetbrains-mono"
     ];
 
     # These CLIs are already installed with npm on this Mac.

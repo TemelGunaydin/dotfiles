@@ -1,51 +1,47 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- For example, changing the color scheme:
--- config.color_scheme = "Cai (Gogh)"
+config.color_scheme = "rose-pine-moon"
+config.font = wezterm.font("Hack Nerd Font")
+config.font_size = 15.0
+config.window_background_opacity = 0.8
+config.macos_window_background_blur = 50
+config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "RESIZE"
 
--- config.color_scheme = "Atelier Lakeside (base16)"
--- config.color_scheme = "terafox"
--- config.color_scheme = "s3r0 modified (terminal.sexy)"
--- config.color_scheme = "Apathy (base16)"
--- config.color_scheme = "HaX0R_BLUE"
-config.color_scheme = "Pandora"
--- local dimmer = {
--- 	brightness = 0.01,
--- 	saturation = 1,
--- 	hue = 1.0,
--- }
+-- Dim unfocused windows so the focused one is obvious at a glance.
+local UNFOCUSED_FOREGROUND_TEXT_HSB = { hue = 1.0, saturation = 0.25, brightness = 0.45 }
+local UNFOCUSED_WINDOW_BACKGROUND_OPACITY = 0.62
 
--- config.background = {
--- 	{
--- 		source = {
--- 			File = "/Users/temelgunaydin/Desktop/wezterm/luffy.png",
--- 		},
--- 		hsb = dimmer,
--- 		-- height = "Cover",
--- 		-- width = "Cover",
--- 		horizontal_align = "Center",
--- 		vertical_align = "Bottom",
--- 	},
--- }
+-- get_config_overrides() hands back a copy, so the current value is never the
+-- same table we last stored; compare the fields instead of the identity.
+local function same_text_hsb(actual, expected)
+	if actual == nil or expected == nil then
+		return actual == expected
+	end
+	return actual.hue == expected.hue
+		and actual.saturation == expected.saturation
+		and actual.brightness == expected.brightness
+end
 
--- config.window_background_image = '/Users/temelgunaydin/Downloads/lotr.jpg'
--- config.window_background_image_hsb = {
---   brightness = 0.05,
---   hue = 1.0,
---   saturation = 1.0,
--- }
---
--- config.font = wezterm.font("IBM Plex Mono", { weight = "Regular", italic = false })
-config.font = wezterm.font("JetBrains Mono", { weight = "Regular", italic = false })
-config.font_size = 18
-config.initial_cols = 80
-config.initial_rows = 30
-config.tab_max_width = 40
-config.use_fancy_tab_bar = false
+wezterm.on("window-focus-changed", function(window)
+	local overrides = window:get_config_overrides() or {}
+	local text_hsb, opacity
+	if not window:is_focused() then
+		text_hsb = UNFOCUSED_FOREGROUND_TEXT_HSB
+		opacity = UNFOCUSED_WINDOW_BACKGROUND_OPACITY
+	end
 
--- and finally, return the configuration to wezterm
+	-- Only write when one of the two values we own actually changes; a redundant
+	-- set_config_overrides() call would trigger another config reload.
+	if same_text_hsb(overrides.foreground_text_hsb, text_hsb) and overrides.window_background_opacity == opacity then
+		return
+	end
+
+	overrides.foreground_text_hsb = text_hsb
+	overrides.window_background_opacity = opacity
+	window:set_config_overrides(overrides)
+end)
+
 return config

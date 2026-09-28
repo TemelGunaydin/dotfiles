@@ -1,8 +1,9 @@
 # Kişisel Mac kurulumu
 
 [kunchenguid/dotfiles](https://github.com/kunchenguid/dotfiles/tree/9a4a6387d0dd6f4bf9b8a5a732b406916bbbf95d)
-yapısından uyarlanmıştır. Kendi zsh alias'ların, Neovim config'in ve WezTerm
-ayarların korunur; Starship prompt'u ve kaynak reponun yardımcı config'leri eklenir.
+yapısından uyarlanmıştır. Kendi zsh alias'ların ve Neovim config'in korunur;
+WezTerm görünümü kaynak repodan alınır. Starship prompt'u ve kaynak reponun
+yardımcı config'leri eklenir.
 
 ## Dosyaların görevleri
 
@@ -18,7 +19,7 @@ ayarların korunur; Starship prompt'u ve kaynak reponun yardımcı config'leri e
 home/
   .config/
     nvim/                 kişisel Neovim ayarların ve lazy-lock.json
-    wezterm/              kişisel Pandora / JetBrains Mono ayarların
+    wezterm/              kaynak reponun Rosé Pine Moon / Hack Nerd Font ayarları
     herdr/config.toml     mevcut tercihlerin ve kaynak reponun kısayolları
     starship.toml         prompt ayarları
     zellij/               saklanıyor; kurulumu ve bağlantısı kapalı
@@ -34,6 +35,14 @@ home/
   AGENTS.md               Claude, Codex ve OpenCode için ortak talimatlar
   CLAUDE.md               ortak talimat dosyasına yönlendirme
 ```
+
+Config klasörünün tam yolu `home/.config/` şeklindedir. Başındaki nokta nedeniyle
+Finder'da gizlidir; `Cmd+Shift+.` ile gizli dosyaları gösterebilirsin.
+
+WezTerm, kaynak repodaki gibi başlık çubuğu olmadan açılır; tek sekmede sekme
+çubuğu gizlenir. Rosé Pine Moon teması, 15 punto Hack Nerd Font, şeffaflık,
+macOS bulanıklığı ve odakta olmayan pencereleri soluklaştırma ayarları kullanılır.
+Hack Nerd Font, `configuration.nix` üzerinden Homebrew ile kurulur.
 
 `home/AGENTS.md`, kaynak reponun ortak talimatlarına mevcut CodeGraph/RTK
 kurallarını da ekler. Kendi agent tercihlerini burada düzenleyebilirsin.
@@ -80,6 +89,9 @@ Config dosyaları `~/.dotfiles` üzerinden repoya bağlanır. Örneğin `~/.zshr
 `home/.zshrc` dosyasını kullanır. Alias değişiklikleri için dosyayı düzenleyip
 yeni terminal açmak yeterlidir. Neovim ve WezTerm dosyalarını da repoda düzenle.
 Hem `~/.wezterm.lua` hem `~/.config/wezterm` aynı config kaynağına bağlıdır.
+Bu bağlantılardaki dosyaları düzenlemek için yeniden rebuild gerekmez.
+WezTerm değişiklikleri otomatik yükler; gerekirse `Ctrl+Shift+R` ile config'i
+yeniden yükle veya yeni pencere aç.
 `programs.zsh.enable = false`, Home Manager'ın yeni `.zshrc` üretmesini kapatır;
 zsh'ın çalışmasını etkilemez.
 
