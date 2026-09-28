@@ -22,7 +22,7 @@
     };
     dock.autohide = true;
     finder.FXPreferredViewStyle = "Nlsv";  # list view by default
-    finder.CreateDesktop = false;          # clean desktop
+    finder.CreateDesktop = true;          # clean desktop
     trackpad.Clicking = true;              # tap to click
   };
   nix-homebrew = {

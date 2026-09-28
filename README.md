@@ -110,9 +110,16 @@ Kaynak repodaki gibi Pi'nin kendisi ayrı kurulur; mevcut bağımsız Pi kurulum
 korunur. Pi kullanacaksan yeni Mac'te [resmi kurulum adımlarını](https://pi.dev)
 uygula. Tema, Calm ve terminal başlığı eklentileri bu repoda hazırdır. Kişisel
 Pi modelin, düşünme seviyesi, `dark` teması, RTK/model-status eklentileri ve mevcut
-paket listen korundu; kaynak reponun iki sabit sürümlü Pi paketi listeye eklendi.
+paket listen korundu; kaynak reponun sabit sürümlü Codex fast-mode paketi eklendi.
+Web araması için `pi-web-search` kullanılır. Kaynak repodaki `pi-web-access` aynı
+`web_search` aracını tanımladığından ikisi birlikte etkinleştirilmez.
 `rose-pine-moon` kullanmak için `home/.pi/agent/settings.json` içindeki `theme`
 değerini değiştir. Calm, `/calm` ile açılıp kapanır; durumu yerel kalır.
+
+`pi-session-import` eklentisinin komutu `/resume-session` şeklindedir; Claude Code
+ve Codex oturumlarını seçmek için kullanılır. Açık Pi'de config değişikliklerinden
+sonra `/reload` çalıştır. `quietStartup` açık olduğu için başlangıçta eklenti listesi
+gizlenir; yüklenenleri görmek için `pi --verbose` ile başlat.
 
 `models.json` içindeki `lm-studio` değeri yerel sunucunun anahtarsız kullanımına
 ait bir yer tutucudur. Sunucunun ağ adresi değişirse bu dosyayı güncelle.

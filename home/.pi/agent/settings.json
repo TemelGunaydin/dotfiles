@@ -17,7 +17,6 @@
     "npm:pi-mcp-extension",
     "npm:pi-session-kit",
     "npm:pi-web-search",
-    "npm:pi-web-access@0.14.0",
     "npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6"
   ],
   "defaultModel": "gpt-6-sol",
