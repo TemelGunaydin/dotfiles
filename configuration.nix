@@ -1,4 +1,4 @@
-{ user, ... }:
+{ config, lib, user, ... }:
 
 {
   # Determinate already manages the Nix daemon, so nix-darwin shouldn't.
@@ -30,6 +30,14 @@
     inherit user;
     autoMigrate = true;
   };
+
+  # Link brew completion from the pinned source, including after migration.
+  system.activationScripts.postActivation.text = lib.mkAfter ''
+    /bin/mkdir -p "${config.homebrew.prefix}/share/zsh/site-functions"
+    /bin/ln -sfn "${config.nix-homebrew.package}/completions/zsh/_brew" \
+      "${config.homebrew.prefix}/share/zsh/site-functions/_brew"
+  '';
+
   homebrew = {
     enable = true;
     # Keep other installed applications and avoid upgrading during a rebuild.

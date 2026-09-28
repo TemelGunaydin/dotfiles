@@ -20,7 +20,7 @@ home/
   .config/
     nvim/                 kişisel Neovim ayarların ve lazy-lock.json
     wezterm/              kaynak reponun Rosé Pine Moon / Hack Nerd Font ayarları
-    herdr/config.toml     mevcut tercihlerin ve kaynak reponun kısayolları
+    herdr/config.toml     kişisel tmux kısayollarına uyarlanmış Herdr ayarları
     starship.toml         prompt ayarları
     zellij/               saklanıyor; kurulumu ve bağlantısı kapalı
   .claude/settings.json   Claude renk ve bağlam kullanım satırı
@@ -85,6 +85,10 @@ uygular. Codex ve Claude Code mevcut kurulumdaki gibi npm ile, OpenCode
 mevcut Pi eklentisi için listededir. `home.packages` boş olduğu için aynı
 araçların ayrıca Nix kopyaları kurulmaz.
 
+Rebuild, Homebrew'ün `_brew` zsh completion bağlantısını da Nix'in seçtiği
+Homebrew kaynağına yönlendirir. Böylece eski kurulumdan kalan bozuk bağlantı
+onarılır ve yeni kurulumlarda completion dosyası hazır olur.
+
 Config dosyaları `~/.dotfiles` üzerinden repoya bağlanır. Örneğin `~/.zshrc`,
 `home/.zshrc` dosyasını kullanır. Alias değişiklikleri için dosyayı düzenleyip
 yeni terminal açmak yeterlidir. Neovim ve WezTerm dosyalarını da repoda düzenle.
@@ -92,6 +96,16 @@ Hem `~/.wezterm.lua` hem `~/.config/wezterm` aynı config kaynağına bağlıdı
 Bu bağlantılardaki dosyaları düzenlemek için yeniden rebuild gerekmez.
 WezTerm değişiklikleri otomatik yükler; gerekirse `Ctrl+Shift+R` ile config'i
 yeniden yükle veya yeni pencere aç.
+
+Herdr kısayolları `home/.config/herdr/config.toml` dosyasındadır. Prefix `Ctrl+A`;
+ardından `|` yan yana, `-` alt alta panel açar. `h/j/k/l` boyutlandırır, yön
+tuşları panel değiştirir, `m` paneli büyütür/geri alır, `Ctrl+K` paneli kapatır.
+`[` copy mode'a girer; bu modda `v` seçer, `y` kopyalar. Boyutlandırma Herdr'ın
+kendi adımını kullanır; tmux'taki 5 hücre ve `bind -r` davranışı birebir değildir.
+Boyutlandırma moduna `Ctrl+A`, ardından `Shift+R` ile girilir.
+Config değişikliklerini Herdr menüsündeki `reload config` ile veya bu ayarlar
+yüklendikten sonra `Ctrl+A`, ardından `r` ile uygula; rebuild gerekmez.
+
 `programs.zsh.enable = false`, Home Manager'ın yeni `.zshrc` üretmesini kapatır;
 zsh'ın çalışmasını etkilemez.
 

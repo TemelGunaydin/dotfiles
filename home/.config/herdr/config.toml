@@ -1,19 +1,40 @@
 onboarding = false
 
 [keys]
-prefix = "ctrl+b"
-focus_pane_left  = "prefix+h"
-focus_pane_down  = "prefix+j"
-focus_pane_up    = "prefix+k"
-focus_pane_right = "prefix+l"
-split_horizontal = "prefix+double_quote"
-split_vertical    = "prefix+percent"
+# Press Ctrl+A once, release it, then press the action key.
+prefix = "ctrl+a"
+
+# Match tmux split-window -h (side by side) and -v (stacked).
+split_vertical   = "prefix+|"
+split_horizontal = "prefix+minus"
+
+reload_config = "prefix+r"
+zoom = "prefix+m"
+close_pane = "prefix+ctrl+k"
+
+# Herdr uses its own resize step, not tmux's 5-cell increment or bind -r.
+resize_pane_left  = "prefix+h"
+resize_pane_down  = "prefix+j"
+resize_pane_up    = "prefix+k"
+resize_pane_right = "prefix+l"
+# Keep resize mode available without conflicting with reload_config.
+resize_mode = "prefix+shift+r"
+
+# h/j/k/l resize panes, so use arrow keys to move between panes.
+focus_pane_left  = "prefix+left"
+focus_pane_down  = "prefix+down"
+focus_pane_up    = "prefix+up"
+focus_pane_right = "prefix+right"
+
 new_tab   = "prefix+c"
 close_tab = "prefix+ampersand"
 workspace_picker = "prefix+w"
 goto             = "prefix+g"
-copy_mode  = "prefix+y"  # herdr's copy-mode entry key; copy-mode's own internal keys (v/space select, y/Enter copy, q/Esc cancel) aren't configurable
+# Copy mode already uses vi keys: v/Space selects, y/Enter copies, q/Esc exits.
+copy_mode = "prefix+["
 
 [ui]
+# Keep mouse selections until explicitly copied with Ctrl+C.
+copy_on_select = false
 # Agents panel order: explicit choice of "spaces" (grouped by space, the default) over "priority".
 agent_panel_sort = "spaces"
