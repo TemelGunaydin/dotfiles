@@ -21,6 +21,11 @@ plugins=(git zsh-autosuggestions zsh-bat zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
  alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+ #acik olan port goruntuleme ve PID ogrenme
+ alias port="lsof -nP -iTCP:3000 -sTCP:LISTEN"
+
 #
 # convert below for fish config
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"

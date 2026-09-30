@@ -49,3 +49,7 @@ sidebar_collapsed_mode = "hidden"
 copy_on_select = true
 # Agents panel order: explicit choice of "spaces" (grouped by space, the default) over "priority".
 agent_panel_sort = "spaces"
+
+[theme]
+name = "gruvbox"
+auto_switch = false
