@@ -11,6 +11,9 @@
   "steeringMode": "all",
   "followUpMode": "all",
   "collapseChangelog": true,
+  "extensions": [
+    "~/Projects/shorts-pipeline/.pi/extensions/workflow"
+  ],
   "packages": [
     "npm:pi-open-agents",
     "npm:pi-session-import",

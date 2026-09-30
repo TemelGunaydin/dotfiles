@@ -289,6 +289,12 @@ You do not need to learn these tools to follow the installation steps:
   if you want to use it. The repository includes a Rosé Pine Moon theme, Calm,
   terminal-title, RTK, and model-status extensions, plus the packages listed in
   `home/.pi/agent/settings.json`.
+- The local `/workflow` extension is loaded globally from
+  `~/Projects/shorts-pipeline/.pi/extensions/workflow` through Pi's settings.
+  Its source is not copied into this repository; keep that directory available
+  on each Mac. Run `/reload` inside Pi after changing the configuration.
+  Workflow starts off: `/workflow on` enables delegation without starting a task,
+  while `/workflow off` disables further delegation.
 - Agent definitions live in `home/.pi/agent/agents/` and are linked to
   `~/.pi/agent/agents/` by Home Manager. Only these three are included:
   - `SolOrchestrator.md` (`sol`): plans work, delegates, and performs final review.
