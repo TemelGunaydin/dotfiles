@@ -148,6 +148,7 @@ a separate copy.
 | Packages or macOS preferences | `configuration.nix` | Run `./rebuild.sh` |
 | Managed file links | `home.nix` | Run `./rebuild.sh` |
 | Shell aliases or plugins | `home/.zshrc` | Open a new terminal |
+| Default editor (`EDITOR` / `VISUAL`) | `home/.zshenv` | Open a new shell; already-running apps keep their old environment |
 | Neovim settings | `home/.config/nvim/` | Restart Neovim |
 | WezTerm appearance | `home/.config/wezterm/wezterm.lua` | Usually reloads automatically; use `Ctrl+Shift+R` if needed |
 | Herdr shortcuts | `home/.config/herdr/config.toml` | Use `Ctrl+A`, then `r` |
@@ -186,6 +187,7 @@ keys together.
 | `\` | Hide or show the left sidebar completely |
 | `Shift+R` | Enter resize mode |
 | `r` | Reload the configuration |
+| `e` | Open the current pane's retained output history in Neovim |
 | `c` | Create a tab |
 | `w` | Open sidebar navigation |
 | `[` | Enter copy mode; `v` selects, `y` copies, `q` or Esc exits |
@@ -197,6 +199,17 @@ In sidebar navigation mode (`Ctrl+A`, then `w`), use **bare `j`/`k`** to move do
 through the list; Down/Up arrows still work. Enter selects an item and Esc exits.
 This is separate from `Ctrl+A`, then `h/j/k/l`, which still switches terminal panes.
 No Shift key is needed.
+
+To inspect earlier prompts, replies, and displayed tool output, press `Ctrl+A`,
+then `e`. Herdr opens a temporary text snapshot in Neovim. Search with `/text`,
+press Enter, and use `n`/`N` to move between matches; `:q` returns to the original
+pane. This covers retained terminal output, not the complete Pi session JSONL.
+
+`home/.zshenv` sets `EDITOR` and `VISUAL` to `nvim`. An already-running Herdr
+server keeps its original editor environment; reloading the config or reattaching
+does not update it. Once your active tasks are safely finished, restart the server
+from a new terminal to apply the editor setting. Stopping a server also stops its
+panes, so do not do that during ongoing work.
 
 Mouse selections are copied automatically. Herdr uses its own resize increments;
 they are not the same as tmux's five-cell resize or repeatable bindings.
@@ -278,7 +291,7 @@ You do not need to learn these tools to follow the installation steps:
 | `configuration.nix` | Lists packages and macOS preferences |
 | `home.nix` | Defines the app settings links |
 | `home/` | Contains the actual settings you edit |
-| `tests/` | Checks the setup scripts, Herdr shortcuts, and Pi Calm extension |
+| `tests/` | Checks the setup scripts, shell editor defaults, Herdr shortcuts, and Pi Calm extension |
 
 ## Optional and advanced notes
 
