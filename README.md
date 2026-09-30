@@ -24,7 +24,8 @@ Windows or Linux.
 - **Command-line tools:** Utilities such as `fzf`, `ripgrep`, `lazygit`, `bat`, `eza`,
   and `zoxide`, plus Codex, Claude Code, OpenCode, CodeGraph, and RTK.
 - **AI settings:** Shared agent instructions, Claude settings, and Pi settings,
-  themes, and extensions. **Pi itself must be installed separately.**
+  themes, extensions, and three agent definitions: Sol, DeepSeek, and MiMo.
+  **Pi itself must be installed separately.**
 - **macOS preferences:** Dark mode, an auto-hiding Dock and menu bar, hidden desktop
   icons, Finder list view, faster key repeat, and tap-to-click.
 
@@ -151,6 +152,7 @@ a separate copy.
 | WezTerm appearance | `home/.config/wezterm/wezterm.lua` | Usually reloads automatically; use `Ctrl+Shift+R` if needed |
 | Herdr shortcuts | `home/.config/herdr/config.toml` | Use `Ctrl+A`, then `r` |
 | Pi settings or extensions | `home/.pi/agent/` | Run `/reload` inside Pi |
+| Pi agent definitions | `home/.pi/agent/agents/` | Restart Pi |
 | Shared AI instructions | `home/AGENTS.md` | Start a new agent session |
 
 Run rebuild commands **from the repository folder**, for example:
@@ -180,11 +182,15 @@ keys together.
 | `\|` | Split into side-by-side panes |
 | `-` | Split into stacked panes |
 | `m` | Enlarge the current pane, or restore its size |
-| `Ctrl+K` | Close the current pane |
+| `x` | Close the current pane |
+| `\` | Hide or show the left sidebar completely |
 | `Shift+R` | Enter resize mode |
 | `r` | Reload the configuration |
 | `c` | Create a tab |
 | `[` | Enter copy mode; `v` selects, `y` copies, `q` or Esc exits |
+
+The sidebar shortcut is `Ctrl+A`, then `\`. Neovim's file explorer still toggles
+with a bare `\` inside Neovim, so the two shortcuts do not interfere.
 
 Mouse selections are copied automatically. Herdr uses its own resize increments;
 they are not the same as tmux's five-cell resize or repeatable bindings.
@@ -234,6 +240,17 @@ You do not need to learn these tools to follow the installation steps:
   if you want to use it. The repository includes a Rosé Pine Moon theme, Calm,
   terminal-title, RTK, and model-status extensions, plus the packages listed in
   `home/.pi/agent/settings.json`.
+- Agent definitions live in `home/.pi/agent/agents/` and are linked to
+  `~/.pi/agent/agents/` by Home Manager. Only these three are included:
+  - `SolOrchestrator.md` (`sol`): plans work, delegates, and performs final review.
+  - `MiMoImplementation.md` (`mimo`): implements the plan and runs relevant checks.
+  - `DeepSeekDiffReview.md` (`deepseek`): reviews changes without editing files.
+  Sol delegates only to MiMo and DeepSeek; Qwen is not included. These definitions
+  use `pi-open-agents`, which is already listed in the Pi packages. On an existing
+  setup, run `./rebuild.sh` to create the new link; Home Manager backs up a
+  conflicting agents folder. Restart Pi, run `/agents` to see the definitions, and
+  use `/agent sol` to select Sol. Their configured model providers still require
+  your own authentication.
 - Pi's configured theme is `dark`. Change `theme` to `rose-pine-moon` in that file
   to use the included theme. Review the default provider, model, and thinking level
   for your own account.

@@ -42,6 +42,9 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/themes";
   home.file.".pi/agent/extensions".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/extensions";
+  # Only Sol, DeepSeek, and MiMo agent definitions are shared between Macs.
+  home.file.".pi/agent/agents".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/agents";
   home.file.".pi/agent/models.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.pi/agent/models.json";
   home.file.".pi/agent/settings.json".source =

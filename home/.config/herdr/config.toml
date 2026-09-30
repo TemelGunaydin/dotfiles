@@ -9,8 +9,10 @@ split_vertical   = "prefix+|"
 split_horizontal = "prefix+minus"
 
 reload_config = "prefix+r"
+# Match Neovim's backslash tree toggle without intercepting it inside panes.
+toggle_sidebar = "prefix+\\"
 zoom = "prefix+m"
-close_pane = "prefix+ctrl+k"
+close_pane = "prefix+x"
 
 # Herdr uses its own resize step, not tmux's 5-cell increment or bind -r.
 # Prefix + arrows resize panes, leaving h/j/k/l free for navigation.
@@ -35,6 +37,8 @@ goto             = "prefix+g"
 copy_mode = "prefix+["
 
 [ui]
+# Hide the sidebar completely when toggled closed, like Neovim's file explorer.
+sidebar_collapsed_mode = "hidden"
 # Copy mouse selections automatically.
 copy_on_select = true
 # Agents panel order: explicit choice of "spaces" (grouped by space, the default) over "priority".
