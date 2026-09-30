@@ -34,7 +34,7 @@ goto             = "prefix+g"
 copy_mode = "prefix+["
 
 [ui]
-# Keep mouse selections until explicitly copied with Ctrl+C.
-copy_on_select = false
+# Copy mouse selections automatically.
+copy_on_select = true
 # Agents panel order: explicit choice of "spaces" (grouped by space, the default) over "priority".
 agent_panel_sort = "spaces"
