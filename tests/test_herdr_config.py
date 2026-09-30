@@ -20,6 +20,10 @@ class HerdrConfigTests(unittest.TestCase):
             with self.subTest(direction=direction):
                 self.assertEqual(self.keys[f"focus_pane_{direction}"], f"prefix+{key}")
 
+    def test_sidebar_navigation_uses_vim_keys_and_keeps_arrows(self):
+        self.assertEqual(self.keys["navigate_workspace_up"], ["up", "k"])
+        self.assertEqual(self.keys["navigate_workspace_down"], ["down", "j"])
+
     def test_prefix_arrows_resize_panes(self):
         for direction in ("left", "down", "up", "right"):
             with self.subTest(direction=direction):
@@ -35,7 +39,12 @@ class HerdrConfigTests(unittest.TestCase):
         self.assertEqual(self.keys["close_pane"], "prefix+x")
 
     def test_configured_action_shortcuts_do_not_conflict(self):
-        shortcuts = [value for name, value in self.keys.items() if name != "prefix"]
+        shortcuts = [
+            shortcut
+            for name, value in self.keys.items()
+            if name != "prefix"
+            for shortcut in (value if isinstance(value, list) else [value])
+        ]
         self.assertEqual(len(shortcuts), len(set(shortcuts)))
 
 

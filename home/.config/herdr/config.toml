@@ -29,6 +29,12 @@ focus_pane_down  = "prefix+j"
 focus_pane_up    = "prefix+k"
 focus_pane_right = "prefix+l"
 
+# In sidebar navigate mode, j/k move through the list; keep arrow keys too.
+# Explicit workspace bindings replace the implicit j/k pane-navigation defaults.
+# The prefix-based pane shortcuts above remain unchanged.
+navigate_workspace_up   = ["up", "k"]
+navigate_workspace_down = ["down", "j"]
+
 new_tab   = "prefix+c"
 close_tab = "prefix+ampersand"
 workspace_picker = "prefix+w"

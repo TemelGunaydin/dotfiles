@@ -187,10 +187,16 @@ keys together.
 | `Shift+R` | Enter resize mode |
 | `r` | Reload the configuration |
 | `c` | Create a tab |
+| `w` | Open sidebar navigation |
 | `[` | Enter copy mode; `v` selects, `y` copies, `q` or Esc exits |
 
 The sidebar shortcut is `Ctrl+A`, then `\`. Neovim's file explorer still toggles
 with a bare `\` inside Neovim, so the two shortcuts do not interfere.
+
+In sidebar navigation mode (`Ctrl+A`, then `w`), use **bare `j`/`k`** to move down/up
+through the list; Down/Up arrows still work. Enter selects an item and Esc exits.
+This is separate from `Ctrl+A`, then `h/j/k/l`, which still switches terminal panes.
+No Shift key is needed.
 
 Mouse selections are copied automatically. Herdr uses its own resize increments;
 they are not the same as tmux's five-cell resize or repeatable bindings.
