@@ -13,18 +13,19 @@ zoom = "prefix+m"
 close_pane = "prefix+ctrl+k"
 
 # Herdr uses its own resize step, not tmux's 5-cell increment or bind -r.
-resize_pane_left  = "prefix+h"
-resize_pane_down  = "prefix+j"
-resize_pane_up    = "prefix+k"
-resize_pane_right = "prefix+l"
+# Prefix + arrows resize panes, leaving h/j/k/l free for navigation.
+resize_pane_left  = "prefix+left"
+resize_pane_down  = "prefix+down"
+resize_pane_up    = "prefix+up"
+resize_pane_right = "prefix+right"
 # Keep resize mode available without conflicting with reload_config.
 resize_mode = "prefix+shift+r"
 
-# h/j/k/l resize panes, so use arrow keys to move between panes.
-focus_pane_left  = "prefix+left"
-focus_pane_down  = "prefix+down"
-focus_pane_up    = "prefix+up"
-focus_pane_right = "prefix+right"
+# Navigate between panes with Neovim-style h/j/k/l keys.
+focus_pane_left  = "prefix+h"
+focus_pane_down  = "prefix+j"
+focus_pane_up    = "prefix+k"
+focus_pane_right = "prefix+l"
 
 new_tab   = "prefix+c"
 close_tab = "prefix+ampersand"
