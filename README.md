@@ -201,6 +201,49 @@ No Shift key is needed.
 Mouse selections are copied automatically. Herdr uses its own resize increments;
 they are not the same as tmux's five-cell resize or repeatable bindings.
 
+## Neovim shortcuts inside Herdr
+
+Neovim runs **inside a Herdr terminal pane** and can have its own split editor
+windows. These are two separate layers: `Ctrl+A` controls Herdr, while Neovim's
+shortcuts control the editor inside the pane.
+
+For the Neovim shortcuts below, press **Esc** first to enter Normal mode. The
+Neovim **leader key is Space**, not comma. Press Space, release it, then press the
+remaining keys in order.
+
+### Similar actions, different shortcuts
+
+| Action | Inside Neovim | In Herdr |
+| --- | --- | --- |
+| Move left / down / up / right between editor splits or terminal panes | `Ctrl+h/j/k/l` | `Ctrl+A`, then `h/j/k/l` |
+| Toggle the left panel | `\` toggles the file explorer | `Ctrl+A`, then `\` toggles the sidebar |
+| Move down/up in the left list | `j/k` in the file explorer | `Ctrl+A`, then `w`, followed by bare `j/k` |
+| Create a side-by-side split | Space, then `v` | `Ctrl+A`, then `\|` |
+| Close a split or pane | `Ctrl+W`, then `c` closes an editor split | `Ctrl+A`, then `x` closes a terminal pane |
+
+For example, `Ctrl+j` moves to the editor window below **inside Neovim**;
+`Ctrl+A`, then `j` moves to the terminal pane below **in Herdr**. Neither needs Shift.
+Closing an editor split does not close its Herdr pane. Neovim's `Ctrl+W`, then `c`
+requires another editor window to remain open.
+
+### Other useful Neovim shortcuts
+
+| Shortcut (Normal mode) | Action |
+| --- | --- |
+| `h/j/k/l` | Move the cursor left / down / up / right |
+| `i`, then Esc when finished | Start typing, then return to Normal mode |
+| Space, then `w` | Save the current file |
+| Space, then `f`, then `f` | Find a file |
+| Space, then `f`, then `g` | Search project text |
+| Space, then `s`, then `b` | List open buffers (files) |
+| `Shift+h` / `Shift+l` | Switch to the previous / next buffer |
+| Space, then `c` | Close the current buffer, not the Herdr pane |
+| Space, then `q` | Quit Neovim; unsaved changes prevent quitting |
+
+These personal mappings are defined in
+[`remap.lua`](home/.config/nvim/lua/tgunaydin/remap.lua). Herdr's mappings are in
+[`config.toml`](home/.config/herdr/config.toml).
+
 ## Troubleshooting
 
 - **“Nix is not available” or a request to open a new terminal:** Open a new Terminal
