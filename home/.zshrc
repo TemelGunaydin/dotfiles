@@ -133,3 +133,8 @@ export PATH="$HOME/.kimi-code/bin:$PATH"
 if [[ $TERM != "dumb" ]] && command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 fi
+
+# Private aliases and settings stay outside the repository and load last.
+if [[ -r "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
+fi

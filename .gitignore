@@ -5,6 +5,9 @@
 /result
 /result-*
 
+# Never track local-only shell settings, even if copied into the repository.
+.zshrc.local
+
 # Home Manager adoption backups
 *.before-home-manager
 *.backup

@@ -147,7 +147,8 @@ a separate copy.
 | --- | --- | --- |
 | Packages or macOS preferences | `configuration.nix` | Run `./rebuild.sh` |
 | Managed file links | `home.nix` | Run `./rebuild.sh` |
-| Shell aliases or plugins | `home/.zshrc` | Open a new terminal |
+| Shared shell aliases or plugins | `home/.zshrc` | Open a new terminal |
+| Private/local shell aliases | `~/.zshrc.local` (outside this repository) | Open a new terminal or run `source ~/.zshrc` |
 | Default editor (`EDITOR` / `VISUAL`) | `home/.zshenv` | Open a new shell; already-running apps keep their old environment |
 | Neovim settings | `home/.config/nvim/` | Restart Neovim |
 | WezTerm appearance | `home/.config/wezterm/wezterm.lua` | Usually reloads automatically; use `Ctrl+Shift+R` if needed |
@@ -169,6 +170,17 @@ already linked app settings file does not require a rebuild.
 
 If you want your edits on another Mac, commit and push them to your own repository,
 then download that repository there. Do not commit passwords, API keys, or sessions.
+
+### Keep personal aliases private
+
+Put local-only aliases and private settings in **`~/.zshrc.local`**, not in the
+linked `~/.zshrc`. The shared shell config loads that optional file last, so local
+settings can override shared ones. The file stays outside the repository, and
+`.gitignore` also excludes `.zshrc.local` if it is accidentally copied here.
+
+This local file is not installed, backed up, or transferred by dotfiles. Manage it
+separately on each Mac. Removing information from a tracked file does not remove
+it from older Git commits; rotate any credentials that were already published.
 
 ## Herdr pane shortcuts
 
