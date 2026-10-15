@@ -22,7 +22,7 @@ Windows or Linux.
 - **Editor:** A personal Neovim configuration and its plugin list.
 - **Terminal panes:** Herdr, which lets you work in several terminal panes and tabs.
 - **Command-line tools:** Utilities such as `fzf`, `ripgrep`, `lazygit`, `bat`, `eza`,
-  and `zoxide`, plus Codex, Claude Code, OpenCode, CodeGraph, and RTK.
+  and `zoxide`, plus Codex, Claude Code, OpenCode, CodeGraph, RTK, and PushTrack.
 - **AI settings:** Shared agent instructions, Claude settings, and Pi settings,
   themes, extensions, and three agent definitions: Sol, DeepSeek, and MiMo.
   **Pi itself must be installed separately.**
@@ -130,9 +130,18 @@ You can check that the tools are available:
 nvim --version
 starship --version
 herdr --version
+pushtrack --version
 ```
 
 Run `herdr` to open the terminal workspace manager, or `nvim` to open Neovim.
+PushTrack is built automatically from a pinned GitHub revision by Nix during
+bootstrap/rebuild; you do not need to install Rust yourself. First-time compilation
+can take a few minutes. Run `pushtrack add ~/Projects` to choose folders, then
+`pushtrack --watch` to open its local dashboard. No folders, AI models, or model
+runtimes are installed/configured automatically. Existing PushTrack settings stay
+local and are preserved. A previous `~/.local/bin/pushtrack` can take precedence
+over the managed copy; check `type -a pushtrack` if needed.
+
 AI tools may need their own sign-in or API keys; this repository does not include
 credentials.
 
@@ -145,7 +154,8 @@ a separate copy.
 
 | What you want to change | File to edit | How to apply it |
 | --- | --- | --- |
-| Packages or macOS preferences | `configuration.nix` | Run `./rebuild.sh` |
+| Homebrew packages or macOS preferences | `configuration.nix` | Run `./rebuild.sh` |
+| PushTrack source/version | `packages/pushtrack.nix` | Run `./rebuild.sh` |
 | Managed file links | `home.nix` | Run `./rebuild.sh` |
 | Shared shell aliases or plugins | `home/.zshrc` | Open a new terminal |
 | Private/local shell aliases | `~/.zshrc.local` (outside this repository) | Open a new terminal or run `source ~/.zshrc` |
@@ -301,7 +311,8 @@ You do not need to learn these tools to follow the installation steps:
 
 - **Nix** provides the configuration tooling and its dependencies.
 - **nix-darwin** uses that configuration to manage macOS settings and run the setup.
-- **Homebrew** installs the apps and command-line tools.
+- **Homebrew** installs most apps and command-line tools. PushTrack is built and
+  installed through Nix from the pinned source in `packages/pushtrack.nix`.
 - **Home Manager** connects the settings files to their expected locations in your
   home folder and backs up conflicting files.
 
@@ -311,7 +322,8 @@ You do not need to learn these tools to follow the installation steps:
 | `rebuild.sh` | Points `~/.dotfiles` at this checkout and applies the configuration |
 | `flake.nix` / `flake.lock` | Connect the Nix components, set the account name, and record dependency versions |
 | `configuration.nix` | Lists packages and macOS preferences |
-| `home.nix` | Defines the app settings links |
+| `home.nix` | Defines app settings links and the automatic PushTrack installation |
+| `packages/pushtrack.nix` | Pins PushTrack's source and Rust dependencies |
 | `home/` | Contains the actual settings you edit |
 | `tests/` | Checks the setup scripts, shell editor defaults, Herdr shortcuts, and Pi Calm extension |
 
@@ -323,7 +335,9 @@ You do not need to learn these tools to follow the installation steps:
 - Pi is not installed by these scripts. Follow its [official installation steps](https://pi.dev)
   if you want to use it. The repository includes a Rosé Pine Moon theme, Calm,
   terminal-title, RTK, model-status, and session-history extensions, plus the packages listed in
-  `home/.pi/agent/settings.json`.
+  `home/.pi/agent/settings.json`. Terminal Todos is pinned to `v1.5.1`, which
+  uses `~/.pi/agent/cache/terminal-todos/` rather than Pi's deprecated `tools/` path.
+  Its native app downloads only after first-use approval in `/todo`.
 - The local `/workflow` extension is loaded globally from
   `~/Projects/shorts-pipeline/.pi/extensions/workflow` through Pi's settings.
   Its source is not copied into this repository; keep that directory available
@@ -360,9 +374,10 @@ You do not need to learn these tools to follow the installation steps:
 - Zellij settings are stored in `home/.config/zellij/`, but its package and Home
   Manager link are disabled. To use the `ai-cli` alias, enable both and install the
   Cursor/Bun tools used by its layout.
-- Apps are managed through Homebrew, with Codex, Claude Code, and CodeGraph declared
-  as npm packages and OpenCode supplied by `anomalyco/tap`. `home.packages` is empty
-  to avoid installing duplicate Nix copies.
+- Most apps are managed through Homebrew, with Codex, Claude Code, and CodeGraph
+  declared as npm packages and OpenCode supplied by `anomalyco/tap`. PushTrack is
+  the exception: `home.packages` installs its pinned Nix build, without a second
+  Homebrew installation. Model/runtime setup remains separate and opt-in.
 - Both `~/.wezterm.lua` and `~/.config/wezterm` point to the same WezTerm config.
   Home Manager does not generate a new `.zshrc` because `programs.zsh.enable` is
   `false`; Zsh still works through the linked file.

@@ -1,4 +1,4 @@
-{ config, user, ... }:
+{ config, pkgs, user, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
@@ -7,9 +7,9 @@ in
   home.username = user;
   home.homeDirectory = "/Users/${user}";
   home.stateVersion = "24.11";
-  # Applications are declared under homebrew in configuration.nix.
+  # PushTrack is built from a pinned source; other apps use Homebrew.
   # Keep one installation source for each application.
-  home.packages = [ ];
+  home.packages = [ (pkgs.callPackage ./packages/pushtrack.nix { }) ];
 
   # Preserve the existing zsh files and aliases instead of generating a .zshrc.
   # Oh My Zsh provides the existing plugins; .zshrc initializes Starship.

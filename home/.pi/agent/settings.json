@@ -23,7 +23,7 @@
     "npm:pi-web-search",
     "npm:@ryan_nookpi/pi-extension-codex-fast-mode@0.2.6",
     "npm:pi-imagegen",
-    "git:github.com/TemelGunaydin/terminal-todos@v1.5.0"
+    "git:github.com/TemelGunaydin/terminal-todos@v1.5.1"
   ],
   "defaultModel": "gpt-6.1-sol",
   "defaultProvider": "openai-codex",
