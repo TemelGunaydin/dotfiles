@@ -38,13 +38,25 @@ class HerdrConfigTests(unittest.TestCase):
     def test_prefix_x_closes_pane(self):
         self.assertEqual(self.keys["close_pane"], "prefix+x")
 
+    def test_history_viewer_replaces_terminal_only_shortcut(self):
+        self.assertEqual(self.keys["edit_scrollback"], [])
+        viewer, = self.keys["command"]
+        self.assertEqual(viewer["key"], "prefix+e")
+        self.assertEqual(viewer["type"], "pane")
+        self.assertEqual(
+            viewer["command"],
+            'node "$HOME/.pi/agent/extensions/session-history/viewer.cjs"',
+        )
+        self.assertTrue((ROOT / "home/.pi/agent/extensions/session-history/viewer.cjs").is_file())
+
     def test_configured_action_shortcuts_do_not_conflict(self):
         shortcuts = [
             shortcut
             for name, value in self.keys.items()
-            if name != "prefix"
+            if name not in ("prefix", "command")
             for shortcut in (value if isinstance(value, list) else [value])
         ]
+        shortcuts.extend(command["key"] for command in self.keys.get("command", []))
         self.assertEqual(len(shortcuts), len(set(shortcuts)))
 
 

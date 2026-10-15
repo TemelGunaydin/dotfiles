@@ -17,7 +17,7 @@ Windows or Linux.
 
 - **Shell:** Zsh with Oh My Zsh plugins, command suggestions, syntax highlighting,
   personal aliases (shortcuts for commands), and a Starship prompt.
-- **Terminal:** WezTerm with the Rosé Pine Moon theme, Hack Nerd Font, transparency,
+- **Terminal:** WezTerm with the synthwave-everything theme, Hack Nerd Font, transparency,
   and background blur. Unfocused windows are dimmed.
 - **Editor:** A personal Neovim configuration and its plugin list.
 - **Terminal panes:** Herdr, which lets you work in several terminal panes and tabs.
@@ -199,7 +199,7 @@ keys together.
 | `\` | Hide or show the left sidebar completely |
 | `Shift+R` | Enter resize mode |
 | `r` | Reload the configuration |
-| `e` | Open the current pane's retained output history in Neovim |
+| `e` | Open the full saved Pi session in Neovim, or terminal history outside Pi |
 | `c` | Create a tab |
 | `w` | Open sidebar navigation |
 | `[` | Enter copy mode; `v` selects, `y` copies, `q` or Esc exits |
@@ -212,10 +212,20 @@ through the list; Down/Up arrows still work. Enter selects an item and Esc exits
 This is separate from `Ctrl+A`, then `h/j/k/l`, which still switches terminal panes.
 No Shift key is needed.
 
-To inspect earlier prompts, replies, and displayed tool output, press `Ctrl+A`,
-then `e`. Herdr opens a temporary text snapshot in Neovim. Search with `/text`,
-press Enter, and use `n`/`N` to move between matches; `:q` returns to the original
-pane. This covers retained terminal output, not the complete Pi session JSONL.
+To inspect earlier prompts, replies, thinking, and tool output, press `Ctrl+A`,
+then `e`. In a Pi pane, this opens the exact session JSONL as a read-only text
+snapshot, without collapsing or truncating its entries. It includes all saved
+branches and messages from before compaction, not just the current viewport.
+Messages still streaming appear after Pi saves them; reopen the viewer to refresh.
+Search with `/text`, press Enter, and use `n`/`N` to move between matches; `:q`
+returns to the original pane. The temporary snapshot is deleted when Neovim exits.
+Outside Pi, the same shortcut opens retained terminal history.
+
+After installing this change, run `/reload` once in each already-open Pi session
+and reload Herdr's config with `Ctrl+A`, then `r`. New Pi sessions load the extension
+automatically. The viewer identifies the source foreground Pi process, so it does
+not accidentally open another pane's session from the same project. If the
+extension is not loaded, it shows instructions rather than a partial transcript.
 
 `home/.zshenv` sets `EDITOR` and `VISUAL` to `nvim`. An already-running Herdr
 server keeps its original editor environment; reloading the config or reattaching
@@ -312,7 +322,7 @@ You do not need to learn these tools to follow the installation steps:
 
 - Pi is not installed by these scripts. Follow its [official installation steps](https://pi.dev)
   if you want to use it. The repository includes a Rosé Pine Moon theme, Calm,
-  terminal-title, RTK, and model-status extensions, plus the packages listed in
+  terminal-title, RTK, model-status, and session-history extensions, plus the packages listed in
   `home/.pi/agent/settings.json`.
 - The local `/workflow` extension is loaded globally from
   `~/Projects/shorts-pipeline/.pi/extensions/workflow` through Pi's settings.
@@ -379,6 +389,12 @@ configuration without applying it:
 
 ```sh
 nix eval --raw .#darwinConfigurations.mac.system.drvPath
+```
+
+For the Pi session-history viewer (Node.js, no Pi account required):
+
+```sh
+node --test tests/pi-session-history.test.cjs
 ```
 
 For the Pi Calm extension:

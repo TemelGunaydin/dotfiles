@@ -1,8 +1,8 @@
 local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
-
-config.color_scheme = "rose-pine-moon"
+config.color_scheme = "synthwave-everything"
+-- config.color_scheme = "Highyway"
 config.font = wezterm.font("Hack Nerd Font")
 config.font_size = 15.0
 config.window_frame = {

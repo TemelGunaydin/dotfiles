@@ -1,16 +1,9 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export CODEX_HOME="$HOME/.codex"
 # export COLORTERM=truecolor
 # export TERM="xterm-256color"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="" # Starship renders the prompt; Oh My Zsh still loads the plugins.
 
 ZSH_DISABLE_COMPFIX=true
@@ -20,13 +13,8 @@ plugins=(git zsh-autosuggestions zsh-bat zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
- alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
- #acik olan port goruntuleme ve PID ogrenme
- alias port="lsof -nP -iTCP:3000 -sTCP:LISTEN"
-
-#
 # convert below for fish config
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 if [[ -t 0 && -t 1 ]] && command -v zoxide >/dev/null; then
@@ -35,7 +23,6 @@ if [[ -t 0 && -t 1 ]] && command -v zoxide >/dev/null; then
 fi
 
 # ---- FZF -----
-
 # Set up fzf key bindings and fuzzy completion
 if [[ -t 0 && -t 1 ]]; then
   [[ -r /opt/homebrew/opt/fzf/shell/completion.zsh ]] && source /opt/homebrew/opt/fzf/shell/completion.zsh
@@ -44,7 +31,6 @@ fi
 
 
 # -- Use fd instead of fzf --
-
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
@@ -126,8 +112,6 @@ export PATH="$PATH:$HOME/.lmstudio/bin"
 
 export PATH=$PATH:$HOME/.maestro/bin
 
-# kimi-code
-export PATH="$HOME/.kimi-code/bin:$PATH"
 
 # Prompt only; aliases and plugins above remain the existing configuration.
 if [[ $TERM != "dumb" ]] && command -v starship >/dev/null; then
@@ -138,3 +122,6 @@ fi
 if [[ -r "$HOME/.zshrc.local" ]]; then
   source "$HOME/.zshrc.local"
 fi
+
+# Unity CLI
+. "/Users/temelgunaydin/.unity/env"
