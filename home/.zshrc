@@ -125,3 +125,8 @@ fi
 
 # Unity CLI
 . "/Users/temelgunaydin/.unity/env"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/temelgunaydin/.lmstudio/bin"
+# End of LM Studio CLI section
+

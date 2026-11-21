@@ -1,14 +1,16 @@
 local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
-config.color_scheme = "synthwave-everything"
--- config.color_scheme = "Highyway"
+-- config.color_scheme = "synthwave-everything"
+-- config.color_scheme = "Gigavolt (base16)"
+config.color_scheme = "rose-pine-moon"
+-- config.color_scheme = "Gotham (terminal.sexy)"
 config.font = wezterm.font("Hack Nerd Font")
-config.font_size = 15.0
+config.font_size = 17.0
 config.window_frame = {
 	font_size = 15.0,
 }
-config.window_background_opacity = 0.8
+config.window_background_opacity = 1
 config.macos_window_background_blur = 50
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE"
