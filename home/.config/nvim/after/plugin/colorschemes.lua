@@ -1,5 +1,5 @@
-myColorscheme = "kanagawa-dragon"
--- myColorscheme = "xcodedark"
+-- myColorscheme = "kanagawa-dragon"
+myColorscheme = "xcodedark"
 -- myColorscheme = "miasma"
 -- myColorscheme = "neosolarized"
 -- myColorscheme = "kanagawa-dragon"
@@ -22,16 +22,16 @@ myColorscheme = "kanagawa-dragon"
 
 -- vim.cmd.colorscheme(myColorscheme)
 -- usttekine gore alternatif ama daha guvenilir.
-local palette = require("tgunaydin.theme").palette
-
 -- Yorumlardaki italik efektini kaldırmak için global ayar
 vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("tgunaydin_comment_style", { clear = true }),
 	pattern = "*",
 	callback = function()
-		vim.api.nvim_set_hl(0, "Comment", { italic = false, fg = palette.comment })
-		vim.api.nvim_set_hl(0, "@comment", { italic = false, fg = palette.comment })
-		vim.api.nvim_set_hl(0, "Normal", { fg = palette.fg, bg = palette.bg })
-		vim.api.nvim_set_hl(0, "NormalNC", { fg = palette.fg_dim, bg = palette.bg })
+		for _, group in ipairs({ "Comment", "@comment" }) do
+			local highlight = vim.api.nvim_get_hl(0, { name = group, link = false })
+			highlight.italic = false
+			vim.api.nvim_set_hl(0, group, highlight)
+		end
 	end,
 })
 
